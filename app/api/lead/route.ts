@@ -23,6 +23,39 @@ type AirtableErrorShape = {
   };
 };
 
+async function sendLeadNotificationEmail(payload: {
+  to: string;
+  subject: string;
+  text: string;
+}) {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  if (!resendApiKey) {
+    console.warn("Lead email notification skipped: RESEND_API_KEY is not set.");
+    return;
+  }
+
+  const fromEmail = process.env.LEAD_EMAIL_FROM ?? "onboarding@resend.dev";
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${resendApiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: fromEmail,
+      to: [payload.to],
+      subject: payload.subject,
+      text: payload.text,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text().catch(() => "");
+    throw new Error(`Resend API failed (${res.status}): ${err || "Unknown error"}`);
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const apiKey = process.env.AIRTABLE_API_KEY;
@@ -103,6 +136,20 @@ export async function POST(request: Request) {
         const data = (await airtableRes.json()) as {
           records?: Array<{ id: string }>;
         };
+
+        const notifyEmailTo = process.env.LEAD_EMAIL_TO ?? "influcity.karimnagar@gmail.com";
+        const subject = `New ${fields.Type || "Website"} lead - ${fields.Name || "Unknown"}`;
+        const text = backupLines.join("\n");
+
+        try {
+          await sendLeadNotificationEmail({
+            to: notifyEmailTo,
+            subject,
+            text,
+          });
+        } catch (emailError) {
+          console.error("Lead email notification failed:", emailError);
+        }
 
         return NextResponse.json({
           ok: true,

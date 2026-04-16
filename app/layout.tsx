@@ -45,6 +45,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "INFLUCITY" }],
   creator: "INFLUCITY",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",

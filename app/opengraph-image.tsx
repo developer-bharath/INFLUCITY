@@ -50,7 +50,7 @@ export default function OpengraphImage() {
         >
           <div
             style={{
-              display: "inline-flex",
+              display: "flex",
               fontSize: 24,
               letterSpacing: 2.4,
               textTransform: "uppercase",

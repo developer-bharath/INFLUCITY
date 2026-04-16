@@ -6,12 +6,14 @@ type LeadPayload = {
   phone?: string;
   business?: string;
   city?: string;
+  area?: string;
   instagram?: string;
   followers?: string;
   goals?: string;
   message?: string;
   type?: string;
   source?: string;
+  termsAccepted?: boolean;
 };
 
 type AirtableErrorShape = {
@@ -52,9 +54,11 @@ export async function POST(request: Request) {
     if (body.phone?.trim()) fields.Phone = body.phone.trim();
     if (body.business?.trim()) fields["Business Name"] = body.business.trim();
     if (body.city?.trim()) fields.City = body.city.trim();
+    if (body.area?.trim()) fields["Area/Locality"] = body.area.trim();
     if (body.instagram?.trim()) fields.Instagram = body.instagram.trim();
     if (body.followers?.trim()) fields.Followers = body.followers.trim();
     if (body.goals?.trim()) fields.Goals = body.goals.trim();
+    if (body.termsAccepted) fields["Terms Accepted"] = "Yes";
     fields["Created At"] = new Date().toISOString();
 
     const backupLines = [
@@ -64,10 +68,12 @@ export async function POST(request: Request) {
       `Phone: ${fields.Phone ?? ""}`,
       `Business Name: ${fields["Business Name"] ?? ""}`,
       `City: ${fields.City ?? ""}`,
+      `Area/Locality: ${fields["Area/Locality"] ?? ""}`,
       `Instagram: ${fields.Instagram ?? ""}`,
       `Followers: ${fields.Followers ?? ""}`,
       `Goals: ${fields.Goals ?? ""}`,
       `Message: ${body.message?.trim() ?? ""}`,
+      `Terms Accepted: ${body.termsAccepted ? "Yes" : "No"}`,
       `Source: ${body.source?.trim() || "Website"}`,
       `Created At: ${fields["Created At"] ?? ""}`,
     ];

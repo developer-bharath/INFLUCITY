@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -90,10 +90,11 @@ export default function Navbar() {
           <nav className="relative z-10 hidden min-w-0 flex-1 items-center justify-center md:flex">
             {links.map((l) => {
               const active = pathname === l.href;
+              const linkHref = l.href === "/contact" ? "/contact" : l.href;
               return (
                 <Link
                   key={l.href}
-                  href={l.href}
+                  href={linkHref}
                   className={clsx(
                     "relative rounded-full px-3 py-1.5 text-[12px] font-medium tracking-[0.03em] transition-colors lg:px-4",
                     active ? "text-white" : "text-zinc-200/90 hover:text-white"
@@ -157,7 +158,7 @@ export default function Navbar() {
                   transition={{ delay: i * 0.04 }}
                 >
                   <Link
-                    href={l.href}
+                    href={l.href === "/contact" ? "/contact" : l.href}
                     className={clsx(
                       "block rounded-xl px-4 py-3 text-[14px] font-medium transition-colors",
                       pathname === l.href ? "bg-white/12 text-white" : "text-zinc-300 hover:bg-white/[0.06] hover:text-white"

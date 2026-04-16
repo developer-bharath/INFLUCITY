@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -18,6 +18,7 @@ import {
 import FadeIn from "@/components/ui/FadeIn";
 import { HeroReveal, HeroRevealStack } from "@/components/ui/HeroReveal";
 import { BUTTON_MOTION, PREMIUM_EASE } from "@/lib/motion";
+import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
 
 const benefits = [
   {
@@ -85,12 +86,16 @@ const fieldClass =
 export default function InfluencersPage() {
   const [form, setForm] = useState({
     name: "",
+    email: "",
+    countryCode: "+1",
     phone: "",
     handle: "",
     followers: "",
     niche: "",
     city: "",
+    area: "",
     bio: "",
+    termsAccepted: false,
   });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -99,6 +104,12 @@ export default function InfluencersPage() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (!form.termsAccepted) {
+      setError("Please accept the terms to continue");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch("/api/lead", {
@@ -106,14 +117,17 @@ export default function InfluencersPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name,
-          phone: form.phone,
+          email: form.email,
+          phone: `${form.countryCode} ${form.phone}`.trim(),
           city: form.city,
+          area: form.area,
           business: "Influencer",
           instagram: form.handle.startsWith("@") ? form.handle : `@${form.handle}`,
           followers: form.followers,
           goals: form.niche,
           message: form.bio,
           type: "Influencer",
+          termsAccepted: true,
         }),
       });
 
@@ -162,7 +176,7 @@ export default function InfluencersPage() {
           <HeroReveal delay={0.26} className="flex flex-wrap justify-center gap-3">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="#apply"
+                href="#apply-form"
                 className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-[15px] font-semibold text-neutral-950 no-underline transition-colors hover:bg-gray-100"
               >
                 Apply now
@@ -349,6 +363,7 @@ export default function InfluencersPage() {
 
           <div className="grid items-start gap-8 md:gap-10 lg:grid-cols-2">
             <motion.div
+              id="apply-form"
               initial={{ opacity: 0, x: -34 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -382,9 +397,43 @@ export default function InfluencersPage() {
                       </div>
                       <div>
                         <label className="mb-1.5 block text-[13px] font-semibold text-white">WhatsApp Number *</label>
-                        <input required className={fieldClass} placeholder="+91 98765 43210" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                        <div className="grid grid-cols-[72px_1fr] gap-2">
+                          <input
+                            required
+                            list="country-code-options-influencer"
+                            type="text"
+                            className={fieldClass}
+                            value={form.countryCode}
+                            onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                            placeholder="+1"
+                          />
+                          <datalist id="country-code-options-influencer">
+                            {COUNTRY_CODE_SUGGESTIONS.map((code) => (
+                              <option key={code.value + code.label} value={code.value} label={code.label} />
+                            ))}
+                          </datalist>
+                          <input
+                            required
+                            type="tel"
+                            className={fieldClass}
+                            placeholder="Phone number"
+                            value={form.phone}
+                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                          />
+                        </div>
                         <p className="mt-1 text-[11px] text-white/55">We share campaign approvals and briefs here.</p>
                       </div>
+                    </div>
+                    <div>
+                      <label className="mb-1.5 block text-[13px] font-semibold text-white">Email *</label>
+                      <input
+                        required
+                        type="email"
+                        className={fieldClass}
+                        placeholder="you@example.com"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      />
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div>
@@ -422,6 +471,16 @@ export default function InfluencersPage() {
                       </div>
                     </div>
                     <div>
+                      <label className="mb-1.5 block text-[13px] font-semibold text-white">Area / Locality *</label>
+                      <input
+                        required
+                        className={fieldClass}
+                        placeholder="e.g., Indiranagar"
+                        value={form.area}
+                        onChange={(e) => setForm({ ...form, area: e.target.value })}
+                      />
+                    </div>
+                    <div>
                       <label className="mb-1.5 block text-[13px] font-semibold text-white">Bio / Creator pitch</label>
                       <textarea
                         rows={3}
@@ -431,6 +490,24 @@ export default function InfluencersPage() {
                         onChange={(e) => setForm({ ...form, bio: e.target.value })}
                       />
                     </div>
+                    <label className="flex items-start gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-[13px] text-white/85">
+                      <input
+                        type="checkbox"
+                        checked={form.termsAccepted}
+                        onChange={(e) => setForm({ ...form, termsAccepted: e.target.checked })}
+                        className="mt-0.5 h-4 w-4 rounded border-white/30 bg-black accent-white"
+                      />
+                      <span className="leading-relaxed">
+                        I agree to the{" "}
+                        <Link href="/terms" className="underline underline-offset-2 hover:text-white">
+                          Terms & Conditions
+                        </Link>{" "}
+                        and{" "}
+                        <Link href="/privacy" className="underline underline-offset-2 hover:text-white">
+                          Privacy Policy
+                        </Link>
+                      </span>
+                    </label>
                     <motion.button
                       type="submit"
                       disabled={loading}
@@ -441,7 +518,7 @@ export default function InfluencersPage() {
                       {loading ? "Submitting..." : "Apply to Join ->"}
                     </motion.button>
                     {error ? <p className="text-center text-[12px] text-red-300">{error}</p> : null}
-                    <p className="text-center text-[12px] text-white/55">We will contact you on WhatsApp after review.</p>
+                    <p className="text-center text-[12px] text-white/55">We will contact you by email after review.</p>
                   </form>
                 )}
               </div>

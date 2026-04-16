@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { HeroRevealStack } from "@/components/ui/HeroReveal";
 import { BUTTON_MOTION } from "@/lib/motion";
+import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
 
 const fieldClass =
   "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-[14px] text-white outline-none transition-all placeholder:text-gray-500 focus:border-white/35 focus:bg-white/10 focus:ring-2 focus:ring-white/10";
@@ -12,8 +13,10 @@ const fieldClass =
 export default function GetStartedPage() {
   const [form, setForm] = useState({
     name: "",
+    email: "",
     business: "",
     city: "",
+    countryCode: "+1",
     phone: "",
     goals: "",
   });
@@ -31,9 +34,10 @@ export default function GetStartedPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name,
+          email: form.email,
           business: form.business,
           city: form.city,
-          phone: form.phone,
+          phone: `${form.countryCode} ${form.phone}`.trim(),
           goals: form.goals,
           type: "Get started",
         }),
@@ -77,7 +81,7 @@ export default function GetStartedPage() {
         </div>
       </section>
 
-      <section className="relative px-6 py-16 md:py-20">
+      <section id="form" className="relative scroll-mt-24 px-6 py-16 md:py-20">
         <div className="mx-auto max-w-3xl">
           <div className="relative overflow-hidden rounded-2xl border border-white/16 bg-[rgba(0,0,0,0.4)] p-8 backdrop-blur-[10px] shadow-[0_16px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.14)] md:p-10">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white/10 to-transparent" />
@@ -106,6 +110,18 @@ export default function GetStartedPage() {
                 </div>
 
                 <div>
+                  <label className="mb-2 block text-[13px] font-semibold text-gray-300">Email *</label>
+                  <input
+                    required
+                    type="email"
+                    className={fieldClass}
+                    placeholder="you@example.com"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  />
+                </div>
+
+                <div>
                   <label className="mb-2 block text-[13px] font-semibold text-gray-300">Business *</label>
                   <input
                     required
@@ -129,13 +145,30 @@ export default function GetStartedPage() {
                   </div>
                   <div>
                     <label className="mb-2 block text-[13px] font-semibold text-gray-300">Phone *</label>
-                    <input
-                      required
-                      className={fieldClass}
-                      placeholder="+91 98765 43210"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    />
+                    <div className="grid grid-cols-[72px_1fr] gap-2">
+                      <input
+                        required
+                        list="country-code-options-get-started"
+                        type="text"
+                        className={fieldClass}
+                        value={form.countryCode}
+                        onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                        placeholder="+1"
+                      />
+                      <datalist id="country-code-options-get-started">
+                        {COUNTRY_CODE_SUGGESTIONS.map((code) => (
+                          <option key={code.value + code.label} value={code.value} label={code.label} />
+                        ))}
+                      </datalist>
+                      <input
+                        required
+                        type="tel"
+                        className={fieldClass}
+                        placeholder="Phone number"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      />
+                    </div>
                   </div>
                 </div>
 

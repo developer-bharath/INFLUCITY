@@ -3,7 +3,7 @@
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import { motion } from "framer-motion";
-import { FaWhatsapp, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa6";
+import { FaWhatsapp, FaInstagram, FaLinkedinIn, FaYoutube, FaPinterestP, FaXTwitter } from "react-icons/fa6";
 import { ArrowRight, Mail } from "lucide-react";
 import { BUTTON_MOTION, PREMIUM_EASE } from "@/lib/motion";
 
@@ -38,8 +38,10 @@ const cols = [
 const socialLinks = [
   { href: "https://wa.me/918977955534", label: "WhatsApp", Icon: FaWhatsapp },
   { href: "https://www.instagram.com/influ.city?igsh=czQ4OGtxbmNnMWFr&utm_source=qr", label: "Instagram", Icon: FaInstagram },
+  { href: "https://pin.it/1Gykgb4fz", label: "Pinterest", Icon: FaPinterestP },
   { href: "https://www.linkedin.com/", label: "LinkedIn", Icon: FaLinkedinIn },
-  { href: "https://www.youtube.com/", label: "YouTube", Icon: FaYoutube },
+  { href: "https://x.com/influcitiy", label: "X", Icon: FaXTwitter },
+  { href: "https://www.youtube.com/@influcity", label: "YouTube", Icon: FaYoutube },
 ];
 
 export default function Footer() {

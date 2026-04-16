@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -81,7 +81,7 @@ export default function ServicesPage() {
             }
             subtitle={
               <p className="mx-auto max-w-xl text-[17px] leading-relaxed text-gray-500">
-                Strategy, creators, operations, and measurement” unified so your marketing finally feels like infrastructure, not improvisation.
+                Strategy, creators, operations, and measurement� unified so your marketing finally feels like infrastructure, not improvisation.
               </p>
             }
           />

@@ -1,16 +1,23 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, CheckCircle2 } from "lucide-react";
 import { HeroRevealStack } from "@/components/ui/HeroReveal";
 import { BUTTON_MOTION } from "@/lib/motion";
+import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
 
 const fieldClass =
   "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-[14px] text-neutral-900 outline-none transition-all placeholder:text-gray-400 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-200";
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    countryCode: "+1",
+    phone: "",
+    message: "",
+  });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,6 +33,7 @@ export default function ContactPage() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
+          phone: `${form.countryCode} ${form.phone}`.trim(),
           message: form.message,
           type: "Contact",
         }),
@@ -67,7 +75,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="px-6 py-16 md:py-20">
+      <section id="form" className="scroll-mt-24 px-6 py-16 md:py-20">
         <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="rounded-2xl border border-gray-200 bg-white p-7 shadow-[0_6px_24px_rgba(0,0,0,0.05)] md:p-8">
             {done ? (
@@ -100,6 +108,33 @@ export default function ContactPage() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                   />
+                </div>
+                <div>
+                  <label className="mb-2 block text-[13px] font-semibold text-gray-700">Phone *</label>
+                  <div className="grid grid-cols-[72px_1fr] gap-2">
+                    <input
+                      required
+                      list="country-code-options-contact"
+                      type="text"
+                      className={fieldClass}
+                      value={form.countryCode}
+                      onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                      placeholder="+1"
+                    />
+                    <datalist id="country-code-options-contact">
+                      {COUNTRY_CODE_SUGGESTIONS.map((code) => (
+                        <option key={code.value + code.label} value={code.value} label={code.label} />
+                      ))}
+                    </datalist>
+                    <input
+                      required
+                      type="tel"
+                      className={fieldClass}
+                      placeholder="Phone number"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="mb-2 block text-[13px] font-semibold text-gray-700">Message *</label>

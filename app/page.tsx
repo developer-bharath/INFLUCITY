@@ -1,7 +1,8 @@
 ﻿import type { Metadata } from "next";
 import HomeContent from "./home/HomeContent";
 
-const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.in";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.vercel.app";
+const shareImage = "/brand/influcity-share.png";
 
 export const metadata: Metadata = {
   title: {
@@ -25,16 +26,25 @@ export const metadata: Metadata = {
     title: "INFLUCITY - Influencer marketing for local business in India",
     description:
       "Local business promotion India teams trust: structured influencer campaigns, 48-hour launch, and measurable ROI.",
-    url: site,
+    url: siteUrl,
     siteName: "INFLUCITY",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: shareImage,
+        width: 1200,
+        height: 630,
+        alt: "INFLUCITY - Built for Business Growth",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "INFLUCITY - Built for business growth",
     description:
       "Small business marketing India: connect with vetted influencers and track every customer touchpoint.",
+    images: [shareImage],
   },
   robots: {
     index: true,

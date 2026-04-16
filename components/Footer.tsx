@@ -65,10 +65,10 @@ export default function Footer() {
             </div>
             <motion.div whileHover={BUTTON_MOTION.hover} whileTap={BUTTON_MOTION.tap}>
               <Link
-                href="/contact"
+                href="/get-started"
                 className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-black no-underline transition-all hover:bg-gray-100 hover:shadow-[0_0_24px_rgba(255,255,255,0.25)]"
               >
-                Talk to Us
+                Get Started
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
@@ -132,17 +132,14 @@ export default function Footer() {
             <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">Contact</p>
             <motion.a
               href="mailto:influcity.karimnagar@gmail.com"
-              whileHover={{ y: -2, scale: 1.02 }}
+              whileHover={{ x: 2 }}
               transition={{ duration: 0.35, ease: PREMIUM_EASE }}
-              className="group block rounded-2xl border border-white/10 bg-white/5 p-5 no-underline shadow-[0_10px_28px_rgba(0,0,0,0.28)] backdrop-blur-[10px] transition-colors hover:bg-white/10"
+              className="group inline-flex items-center gap-2.5 text-[14px] text-gray-300 no-underline transition-colors hover:text-white"
             >
-              <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white">
-                <Mail className="h-4 w-4" />
-              </div>
-              <p className="mb-1 text-[13px] font-semibold text-white">Email</p>
-              <p className="text-[14px] font-medium text-gray-200">hello@influcity.in</p>
-              <p className="mt-2 text-[12px] text-gray-500 transition-colors group-hover:text-gray-400">We reply within 24 hours</p>
+              <Mail className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-white" />
+              <span className="font-medium">hello@influcity.in</span>
             </motion.a>
+            <p className="mt-2 text-[12px] text-gray-500">We reply within 24 hours</p>
           </div>
         </div>
 

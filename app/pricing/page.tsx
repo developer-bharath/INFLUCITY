@@ -196,7 +196,7 @@ export default function PricingPage() {
 
                     <motion.div whileHover={BUTTON_MOTION.hover} whileTap={BUTTON_MOTION.tap} className="mt-6 inline-block w-full">
                       <Link
-                        href="/contact"
+                        href="/get-started"
                         className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold no-underline transition-colors ${
                           isPopular
                             ? "bg-white text-black hover:bg-gray-100 hover:shadow-[0_0_22px_rgba(255,255,255,0.26)]"
@@ -303,7 +303,7 @@ export default function PricingPage() {
             <div className="flex flex-wrap justify-center gap-3">
               <motion.div whileHover={BUTTON_MOTION.hover} whileTap={BUTTON_MOTION.tap}>
                 <Link
-                  href="/contact"
+                  href="/get-started"
                   className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black no-underline transition-colors hover:bg-gray-100"
                 >
                   Get Started
@@ -311,10 +311,10 @@ export default function PricingPage() {
               </motion.div>
               <motion.div whileHover={BUTTON_MOTION.hover} whileTap={BUTTON_MOTION.tap}>
                 <Link
-                  href="/contact"
+                  href="/get-started"
                   className="inline-flex items-center justify-center rounded-xl border border-gray-600 px-6 py-3 text-sm font-semibold text-white no-underline transition-colors hover:border-gray-400 hover:bg-white/5"
                 >
-                  Talk to Us
+                  Get Started
                 </Link>
               </motion.div>
             </div>

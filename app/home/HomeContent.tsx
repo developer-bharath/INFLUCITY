@@ -287,9 +287,8 @@ export default function HomeContent() {
             initial={{ opacity: 0, y: 12 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2.5 rounded-full border border-gray-200/90 bg-white px-4 py-2 text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.14em] text-gray-500 shadow-[0_1px_8px_rgba(0,0,0,0.05)] mb-8 sm:mb-10 max-w-[94vw]"
+            className="mx-auto mb-8 max-w-[94vw] text-[13px] font-semibold tracking-[0.06em] text-gray-600 sm:mb-10 sm:text-[15px]"
           >
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-950" />
             <span className="text-balance">
               Influencer marketing for local businesses | Structured campaigns across India
             </span>
@@ -330,7 +329,7 @@ export default function HomeContent() {
           >
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/contact"
+                href="/get-started"
                 className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-neutral-950 px-7 sm:px-8 py-3.5 text-[15px] font-semibold text-white no-underline shadow-sm transition-colors hover:bg-neutral-800"
               >
                 Get Started
@@ -665,7 +664,7 @@ export default function HomeContent() {
           <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center sm:justify-center">
             <motion.div className="sm:inline-flex" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/contact"
+                href="/get-started"
                 className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-xl bg-white px-8 py-3.5 text-[15px] font-bold text-neutral-950 no-underline shadow-sm transition-colors hover:bg-gray-100 sm:w-auto"
               >
                 Get Started

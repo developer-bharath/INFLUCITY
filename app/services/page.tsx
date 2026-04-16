@@ -119,7 +119,7 @@ export default function ServicesPage() {
                     <p className="mb-8 text-[15px] leading-relaxed text-gray-500">{svc.desc}</p>
                     <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
                       <Link
-                        href="/contact"
+                        href="/get-started"
                         className="inline-flex items-center gap-2 rounded-xl border border-neutral-950 bg-neutral-950 px-5 py-2.5 text-[13px] font-semibold text-white no-underline transition-colors hover:bg-neutral-800"
                       >
                         Start this service
@@ -227,7 +227,7 @@ export default function ServicesPage() {
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
               <Link
-                href="/contact"
+                href="/get-started"
                 className="inline-flex items-center gap-2 rounded-xl bg-neutral-950 px-7 py-3.5 text-[15px] font-semibold text-white no-underline transition-colors hover:bg-neutral-800"
               >
                 Book a strategy call

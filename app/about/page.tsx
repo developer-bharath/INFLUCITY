@@ -187,8 +187,8 @@ export default function AboutPage() {
               Tell us about your business - we will respond with a clear next step, not a generic pitch deck.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button href="/contact" variant="primary" size="lg">
-                Talk to us <ArrowRight className="h-4 w-4" />
+              <Button href="/get-started" variant="primary" size="lg">
+                Get Started <ArrowRight className="h-4 w-4" />
               </Button>
               <Button href="/influencers" variant="secondary" size="lg">
                 Join as influencer

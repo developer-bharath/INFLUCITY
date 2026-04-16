@@ -23,6 +23,8 @@ export default function BrandLogo({ variant, className }: BrandLogoProps) {
         height={NATURAL_H}
         alt=""
         priority={isNav}
+        loading="eager"
+        fetchPriority={isNav ? "high" : "auto"}
         sizes={isNav ? "200px" : "240px"}
         className={clsx(
           "block w-auto align-top",

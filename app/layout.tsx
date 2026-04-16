@@ -5,9 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://influcity.vercel.app");
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.vercel.app";
 const shareImage = "/brand/influcity-share.png";
 
 const inter = Inter({

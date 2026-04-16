@@ -94,13 +94,44 @@ export default function InfluencersPage() {
   });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    setLoading(false);
-    setDone(true);
+    try {
+      const influencerNotes = [
+        `Handle: @${form.handle}`,
+        `Followers: ${form.followers}`,
+        `Niche: ${form.niche}`,
+        `Bio: ${form.bio || "N/A"}`,
+      ].join(" | ");
+
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          city: form.city,
+          business: "Influencer",
+          message: influencerNotes,
+          source: "Influencer Application",
+        }),
+      });
+
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(data.error || "Failed to submit your application.");
+      }
+
+      setDone(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -413,6 +444,7 @@ export default function InfluencersPage() {
                     >
                       {loading ? "Submitting..." : "Apply to Join ->"}
                     </motion.button>
+                    {error ? <p className="text-center text-[12px] text-red-300">{error}</p> : null}
                     <p className="text-center text-[12px] text-white/55">We will contact you on WhatsApp after review.</p>
                   </form>
                 )}

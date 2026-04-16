@@ -19,13 +19,37 @@ export default function GetStartedPage() {
   });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setDone(true);
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          business: form.business,
+          city: form.city,
+          phone: form.phone,
+          goals: form.goals,
+          source: "Get Started",
+        }),
+      });
+
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(data.error || "Failed to submit your request.");
+      }
+
+      setDone(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -137,6 +161,7 @@ export default function GetStartedPage() {
                   {loading ? "Sending..." : "Get My Campaign Plan"}
                   {!loading ? <ArrowRight className="h-4 w-4" /> : null}
                 </motion.button>
+                {error ? <p className="text-center text-[12px] text-red-300">{error}</p> : null}
               </form>
             )}
           </div>

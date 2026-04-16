@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { useMounted } from "@/lib/useMounted";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -24,6 +23,7 @@ import {
 } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import clsx from "clsx";
+import HeroAnimation from "@/components/HeroAnimation";
 
 /** Static section title stack - avoids scroll-reveal wrappers misaligning headings. */
 function SectionIntro({
@@ -261,92 +261,9 @@ const resultMetrics = [
 ];
 
 export default function HomeContent() {
-  const mounted = useMounted();
-
   return (
     <div className="flex w-full min-w-0 max-w-full flex-col bg-white">
-      {/* Hero */}
-      <section className="relative flex min-h-[82vh] w-full min-w-0 flex-col items-center justify-center overflow-hidden px-6 pb-20 pt-10 sm:min-h-[88vh] sm:pb-24 sm:pt-14">
-        <div
-          className="absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage:
-              "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute top-1/2 left-1/2 h-[min(90vw,720px)] w-[min(90vw,720px)] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{
-            background: "radial-gradient(circle, #f4f4f4 0%, transparent 68%)",
-          }}
-        />
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="mx-auto mb-8 max-w-[94vw] text-[13px] font-semibold tracking-[0.06em] text-gray-600 sm:mb-10 sm:text-[15px]"
-          >
-            <span className="text-balance">
-              Influencer marketing for local businesses | Structured campaigns across India
-            </span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.72, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[clamp(36px,8vw,88px)] font-black tracking-[-2px] sm:tracking-[-3px] leading-[1.02] text-neutral-950 mb-6 sm:mb-7"
-            style={{ fontFamily: "var(--font-poppins), system-ui, sans-serif" }}
-          >
-            Built for
-            <br />
-            <span className="text-gray-500">Business Growth</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.65, delay: 0.18 }}
-            className="text-[16px] sm:text-[17px] text-gray-500 max-w-[560px] mx-auto leading-relaxed mb-10 sm:mb-11 text-pretty"
-          >
-            INFLUCITY is{" "}
-            <strong className="font-semibold text-neutral-800">local business promotion in India</strong> powered by
-            creators - built for owners who need to{" "}
-            <strong className="font-semibold text-neutral-800">get more customers for your shop</strong>, studio, or service
-            without chasing empty impressions. If you want{" "}
-            <strong className="font-semibold text-neutral-800">small business marketing in India</strong> with clear
-            attribution, this is your operating system - not another retainer.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.28 }}
-            className="flex flex-wrap gap-3 justify-center"
-          >
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/get-started"
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-neutral-950 px-7 sm:px-8 py-3.5 text-[15px] font-semibold text-white no-underline shadow-sm transition-colors hover:bg-neutral-800"
-              >
-                Get Started
-                <ArrowRight size={16} aria-hidden />
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/influencers"
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-7 sm:px-8 py-3.5 text-[15px] font-semibold text-neutral-950 no-underline transition-colors hover:bg-gray-50"
-              >
-                Join as Influencer
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <HeroAnimation />
 
       {/* Social proof */}
       <section className="w-full min-w-0 border-y border-gray-100 bg-gray-50/80 px-6 py-20 md:py-24">
@@ -507,33 +424,33 @@ export default function HomeContent() {
             </div>
 
             <FadeIn direction="left" delay={0.08}>
-              <div className="rounded-2xl border border-neutral-800 bg-neutral-900/30 overflow-hidden">
-                <div className="grid grid-cols-3 border-b border-neutral-800 px-5 py-3.5 text-[11px] font-semibold uppercase tracking-wider text-gray-500">
-                  <span>Capability</span>
+              <div className="overflow-hidden rounded-2xl border border-neutral-700/90 bg-neutral-900/55 shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,255,255,0.05)]">
+                <div className="grid grid-cols-3 border-b border-neutral-700/90 bg-white/[0.02] px-5 py-3.5 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+                  <span className="text-gray-300">Capability</span>
                   <span className="text-center text-white">INFLUCITY</span>
-                  <span className="text-center">Typical agency</span>
+                  <span className="text-center text-gray-300">Typical agency</span>
                 </div>
                 {comparisons.map((row, i) => (
                   <div
                     key={row.label}
                     className={clsx(
-                      "grid grid-cols-3 items-center border-b border-neutral-800/80 px-5 py-3.5 last:border-0",
-                      i % 2 === 0 ? "bg-neutral-950/40" : "bg-neutral-950/20"
+                      "grid grid-cols-3 items-center border-b border-neutral-700/80 px-5 py-3.5 last:border-0",
+                      i % 2 === 0 ? "bg-neutral-950/55" : "bg-neutral-900/45"
                     )}
                   >
-                    <span className="text-[13px] text-gray-400 pr-2">{row.label}</span>
+                    <span className="pr-2 text-[13px] text-gray-200">{row.label}</span>
                     <div className="flex justify-center">
                       {row.us ? (
-                        <CheckCircle2 size={18} className="text-white" strokeWidth={1.5} />
+                        <CheckCircle2 size={18} className="text-white" strokeWidth={1.7} />
                       ) : (
-                        <XCircle size={18} className="text-neutral-700" strokeWidth={1.5} />
+                        <XCircle size={18} className="text-neutral-600" strokeWidth={1.7} />
                       )}
                     </div>
                     <div className="flex justify-center">
                       {row.them ? (
-                        <CheckCircle2 size={18} className="text-gray-500" strokeWidth={1.5} />
+                        <CheckCircle2 size={18} className="text-gray-400" strokeWidth={1.7} />
                       ) : (
-                        <XCircle size={18} className="text-neutral-800" strokeWidth={1.5} />
+                        <XCircle size={18} className="text-neutral-600" strokeWidth={1.7} />
                       )}
                     </div>
                   </div>

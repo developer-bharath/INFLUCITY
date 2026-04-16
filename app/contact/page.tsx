@@ -10,6 +10,65 @@ import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
 const fieldClass =
   "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-[14px] text-neutral-900 outline-none transition-all placeholder:text-gray-400 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-200";
 
+function AnimatedSupportLady() {
+  return (
+    <div className="relative mx-auto mb-6 h-[220px] w-full max-w-[260px]">
+      <motion.div
+        aria-hidden
+        className="absolute left-4 top-8 h-16 w-16 rounded-full bg-neutral-200/70 blur-2xl"
+        animate={{ y: [0, -10, 0], opacity: [0.4, 0.75, 0.4] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="absolute right-6 top-4 h-14 w-14 rounded-full bg-neutral-300/65 blur-2xl"
+        animate={{ y: [0, 8, 0], opacity: [0.35, 0.62, 0.35] }}
+        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.35 }}
+      />
+
+      <motion.svg
+        viewBox="0 0 260 220"
+        className="relative z-10 h-full w-full"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ellipse cx="130" cy="206" rx="72" ry="10" fill="#e5e7eb" />
+
+        <rect x="76" y="132" width="108" height="62" rx="24" fill="#111827" />
+        <rect x="86" y="142" width="88" height="42" rx="18" fill="#1f2937" />
+
+        <circle cx="130" cy="98" r="34" fill="#f9d9c4" />
+        <path d="M98 94c0-23 14-38 32-38s32 15 32 38v8H98v-8z" fill="#111827" />
+        <path d="M104 126c8 10 16 14 26 14s18-4 26-14v10c0 16-12 28-26 28s-26-12-26-28v-10z" fill="#f3c7ae" />
+
+        <rect x="104" y="116" width="52" height="50" rx="20" fill="#ffffff" />
+        <rect x="92" y="144" width="76" height="58" rx="26" fill="#f3f4f6" />
+
+        <circle cx="118" cy="98" r="3" fill="#1f2937" />
+        <circle cx="142" cy="98" r="3" fill="#1f2937" />
+        <path d="M121 111c3 3 6 4 9 4s6-1 9-4" stroke="#1f2937" strokeWidth="2" strokeLinecap="round" fill="none" />
+
+        <motion.g animate={{ y: [0, -4, 0] }} transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}>
+          <rect x="28" y="78" width="44" height="28" rx="10" fill="#111827" />
+          <path d="M41 106l-5 9 12-7" fill="#111827" />
+          <path d="M42 91h16M42 97h10" stroke="#f9fafb" strokeWidth="2" strokeLinecap="round" />
+        </motion.g>
+
+        <motion.g
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 3.1, repeat: Infinity, ease: "easeInOut", delay: 0.45 }}
+        >
+          <rect x="188" y="86" width="44" height="28" rx="10" fill="#111827" />
+          <path d="M216 114l7 9-13-7" fill="#111827" />
+          <circle cx="203" cy="99" r="3" fill="#f9fafb" />
+          <circle cx="212" cy="99" r="3" fill="#f9fafb" />
+          <circle cx="221" cy="99" r="3" fill="#f9fafb" />
+        </motion.g>
+      </motion.svg>
+    </div>
+  );
+}
+
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
@@ -162,6 +221,7 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-2xl border border-gray-200 bg-gray-50/70 p-7 md:p-8">
+            <AnimatedSupportLady />
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">Email</p>
             <a
               href="mailto:hello@influicty.in"

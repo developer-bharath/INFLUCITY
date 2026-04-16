@@ -27,7 +27,7 @@ export default function ContactPage() {
           name: form.name,
           email: form.email,
           message: form.message,
-          source: "Contact",
+          type: "Contact",
         }),
       });
 

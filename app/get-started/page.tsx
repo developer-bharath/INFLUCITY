@@ -35,7 +35,7 @@ export default function GetStartedPage() {
           city: form.city,
           phone: form.phone,
           goals: form.goals,
-          source: "Get Started",
+          type: "Get started",
         }),
       });
 

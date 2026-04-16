@@ -6,8 +6,11 @@ type LeadPayload = {
   phone?: string;
   business?: string;
   city?: string;
+  instagram?: string;
+  followers?: string;
   goals?: string;
   message?: string;
+  type?: string;
   source?: string;
 };
 
@@ -42,15 +45,34 @@ export async function POST(request: Request) {
 
     const fields: Record<string, string> = {
       Name: body.name.trim(),
-      Source: body.source?.trim() || "Website",
+      Type: body.type?.trim() || body.source?.trim() || "Website",
     };
 
     if (body.email?.trim()) fields.Email = body.email.trim();
     if (body.phone?.trim()) fields.Phone = body.phone.trim();
-    if (body.business?.trim()) fields.Business = body.business.trim();
+    if (body.business?.trim()) fields["Business Name"] = body.business.trim();
     if (body.city?.trim()) fields.City = body.city.trim();
+    if (body.instagram?.trim()) fields.Instagram = body.instagram.trim();
+    if (body.followers?.trim()) fields.Followers = body.followers.trim();
     if (body.goals?.trim()) fields.Goals = body.goals.trim();
-    if (body.message?.trim()) fields.Message = body.message.trim();
+    fields["Created At"] = new Date().toISOString();
+
+    const backupLines = [
+      `Type: ${fields.Type ?? ""}`,
+      `Name: ${fields.Name ?? ""}`,
+      `Email: ${fields.Email ?? ""}`,
+      `Phone: ${fields.Phone ?? ""}`,
+      `Business Name: ${fields["Business Name"] ?? ""}`,
+      `City: ${fields.City ?? ""}`,
+      `Instagram: ${fields.Instagram ?? ""}`,
+      `Followers: ${fields.Followers ?? ""}`,
+      `Goals: ${fields.Goals ?? ""}`,
+      `Message: ${body.message?.trim() ?? ""}`,
+      `Source: ${body.source?.trim() || "Website"}`,
+      `Created At: ${fields["Created At"] ?? ""}`,
+    ];
+
+    fields.Message = backupLines.join("\n");
 
     const endpoint = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
     let attempts = 0;

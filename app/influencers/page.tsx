@@ -101,13 +101,6 @@ export default function InfluencersPage() {
     setError(null);
     setLoading(true);
     try {
-      const influencerNotes = [
-        `Handle: @${form.handle}`,
-        `Followers: ${form.followers}`,
-        `Niche: ${form.niche}`,
-        `Bio: ${form.bio || "N/A"}`,
-      ].join(" | ");
-
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -116,8 +109,11 @@ export default function InfluencersPage() {
           phone: form.phone,
           city: form.city,
           business: "Influencer",
-          message: influencerNotes,
-          source: "Influencer Application",
+          instagram: form.handle.startsWith("@") ? form.handle : `@${form.handle}`,
+          followers: form.followers,
+          goals: form.niche,
+          message: form.bio,
+          type: "Influencer",
         }),
       });
 

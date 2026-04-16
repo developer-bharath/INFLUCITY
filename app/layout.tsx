@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.vercel.app";
+const shareImage = "/brand/influcity-share.png";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,9 +55,18 @@ export const metadata: Metadata = {
     locale: "en_IN",
     siteName: "INFLUCITY",
     url: siteUrl,
+    images: [
+      {
+        url: shareImage,
+        width: 475,
+        height: 399,
+        alt: "INFLUCITY",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    images: [shareImage],
   },
   robots: {
     index: true,

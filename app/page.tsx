@@ -2,6 +2,7 @@
 import HomeContent from "./home/HomeContent";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.vercel.app";
+const shareImage = "/brand/influcity-share.png";
 
 export const metadata: Metadata = {
   title: {
@@ -29,12 +30,21 @@ export const metadata: Metadata = {
     siteName: "INFLUCITY",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: shareImage,
+        width: 475,
+        height: 399,
+        alt: "INFLUCITY",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "INFLUCITY - Built for business growth",
     description:
       "Small business marketing India: connect with vetted influencers and track every customer touchpoint.",
+    images: [shareImage],
   },
   robots: {
     index: true,

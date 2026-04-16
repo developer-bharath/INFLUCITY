@@ -29,8 +29,10 @@ const cols = [
   {
     heading: "Legal",
     links: [
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
+      { label: "Legal", href: "/legal" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+      { label: "Disclaimer", href: "/disclaimer" },
     ],
   },
 ];
@@ -133,13 +135,13 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">Contact</p>
             <motion.a
-              href="mailto:influcity.karimnagar@gmail.com"
+              href="mailto:hello@influicty.in"
               whileHover={{ x: 2 }}
               transition={{ duration: 0.35, ease: PREMIUM_EASE }}
               className="group inline-flex items-center gap-2.5 text-[14px] text-gray-300 no-underline transition-colors hover:text-white"
             >
               <Mail className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-white" />
-              <span className="font-medium">hello@influcity.in</span>
+              <span className="font-medium">hello@influicty.in</span>
             </motion.a>
             <p className="mt-2 text-[12px] text-gray-500">We reply within 24 hours</p>
           </div>

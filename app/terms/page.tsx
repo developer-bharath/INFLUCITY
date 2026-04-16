@@ -138,10 +138,10 @@ export default function TermsPage() {
             <section>
               <h2 className="mb-2 text-[16px] font-bold text-neutral-950">14. CONTACT</h2>
               <Link
-                href="mailto:hello@influcity.com"
+                href="mailto:hello@influicty.in"
                 className="font-semibold text-neutral-900 underline underline-offset-2"
               >
-                hello@influcity.com
+                hello@influicty.in
               </Link>
             </section>
           </div>

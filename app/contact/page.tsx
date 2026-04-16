@@ -164,11 +164,11 @@ export default function ContactPage() {
           <div className="rounded-2xl border border-gray-200 bg-gray-50/70 p-7 md:p-8">
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">Email</p>
             <a
-              href="mailto:hello@influcity.com"
+              href="mailto:hello@influicty.in"
               className="inline-flex items-center gap-2.5 text-[16px] font-semibold text-neutral-950 no-underline transition-colors hover:text-neutral-700"
             >
               <Mail className="h-4 w-4" />
-              hello@influcity.com
+              hello@influicty.in
             </a>
             <p className="mt-4 text-[14px] leading-relaxed text-gray-500">
               For partnerships, support, or general questions, email us anytime.

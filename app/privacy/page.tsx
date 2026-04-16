@@ -102,10 +102,10 @@ export default function PrivacyPage() {
               <p className="mt-2">
                 Contact:{" "}
                 <Link
-                  href="mailto:hello@influcity.com"
+                  href="mailto:hello@influicty.in"
                   className="font-semibold text-neutral-900 underline underline-offset-2"
                 >
-                  hello@influcity.com
+                  hello@influicty.in
                 </Link>
               </p>
             </section>
@@ -130,10 +130,10 @@ export default function PrivacyPage() {
               <p>
                 Email:{" "}
                 <Link
-                  href="mailto:hello@influcity.com"
+                  href="mailto:hello@influicty.in"
                   className="font-semibold text-neutral-900 underline underline-offset-2"
                 >
-                  hello@influcity.com
+                  hello@influicty.in
                 </Link>
               </p>
             </section>

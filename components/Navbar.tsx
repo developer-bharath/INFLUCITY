@@ -12,6 +12,7 @@ import { BUTTON_MOTION, PREMIUM_EASE } from "@/lib/motion";
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
   { href: "/services", label: "Services" },
   { href: "/pricing", label: "Pricing" },
   { href: "/influencers", label: "Influencers" },
@@ -67,10 +68,17 @@ export default function Navbar() {
               "relative mt-3 flex h-[56px] items-center justify-between rounded-2xl border px-3 sm:px-4 transition-all duration-500",
               scrolled
                 ? "border-slate-300/20 bg-slate-700/64 shadow-[0_12px_30px_rgba(15,23,42,0.26)] backdrop-blur-xl"
-                : "border-white/10 bg-black/44 shadow-[0_8px_20px_rgba(0,0,0,0.16)] backdrop-blur-lg"
+                : "border-white/14 bg-black/70 shadow-[0_14px_34px_rgba(0,0,0,0.4),0_0_24px_rgba(255,255,255,0.12)] backdrop-blur-xl"
             )}
           >
-          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_45%)]" />
+          <div
+            className={clsx(
+              "pointer-events-none absolute inset-0 rounded-2xl",
+              scrolled
+                ? "bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0)_45%)]"
+                : "bg-[linear-gradient(180deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.06)_42%,rgba(255,255,255,0)_80%)]"
+            )}
+          />
           <div
             className={clsx(
               "pointer-events-none absolute inset-0 rounded-2xl",

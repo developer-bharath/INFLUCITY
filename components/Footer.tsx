@@ -12,6 +12,7 @@ const cols = [
     heading: "Product",
     links: [
       { label: "Home", href: "/" },
+      { label: "Blog", href: "/blog" },
       { label: "Services", href: "/services" },
       { label: "Pricing", href: "/pricing" },
       { label: "For influencers", href: "/influencers" },
@@ -53,7 +54,9 @@ export default function Footer() {
 
       <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-14 md:pb-20 md:pt-16">
         {/* Pre-footer CTA */}
-        <section className="mb-14 rounded-[24px] border border-white/12 bg-[rgba(0,0,0,0.45)] p-7 shadow-[0_18px_48px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-[10px] md:mb-16 md:p-10">
+        <section className="relative mb-14 overflow-hidden rounded-[24px] border border-white/14 bg-[rgba(0,0,0,0.52)] p-7 shadow-[0_22px_56px_rgba(0,0,0,0.42),0_0_24px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-[12px] md:mb-16 md:p-10">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(255,255,255,0.16),transparent_38%),radial-gradient(circle_at_88%_12%,rgba(255,255,255,0.1),transparent_44%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.13)_0%,rgba(255,255,255,0.03)_34%,rgba(255,255,255,0)_76%)]" />
           <div className="grid items-center gap-8 md:grid-cols-[1fr_auto]">
             <div>
               <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">Ready to launch</p>
@@ -79,20 +82,21 @@ export default function Footer() {
           </div>
         </section>
 
-        <div className="grid gap-12 md:grid-cols-2 md:gap-10 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5">
+        <div className="grid gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-12 lg:gap-6">
+          <div className="relative rounded-2xl border border-white/8 bg-white/[0.02] p-6 shadow-[0_10px_34px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.08)] lg:col-span-5">
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0)_56%)]" />
             <Link
               href="/"
               aria-label="INFLUCITY - Home"
-              className="mb-6 block shrink-0 no-underline transition-opacity hover:opacity-90"
+              className="relative z-10 mb-6 block shrink-0 no-underline transition-opacity hover:opacity-90"
             >
               <BrandLogo variant="footer" />
             </Link>
-            <p className="max-w-sm text-[14px] leading-relaxed text-gray-500">
+            <p className="relative z-10 max-w-sm text-[14px] leading-relaxed text-gray-500">
               The growth platform connecting local businesses with vetted influencers - structured campaigns, live
               tracking, and outcomes you can measure.
             </p>
-            <div className="mt-6 flex items-center gap-2.5">
+            <div className="relative z-10 mt-6 flex items-center gap-2.5">
               {socialLinks.map(({ href, label, Icon }) => (
                 <motion.a
                   key={label}
@@ -110,7 +114,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-5">
+          <div className="relative rounded-2xl border border-white/8 bg-white/[0.02] p-6 shadow-[0_10px_34px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.08)] lg:col-span-5">
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0)_56%)]" />
+            <div className="relative z-10 grid grid-cols-2 gap-10 sm:grid-cols-3">
             {cols.map((col) => (
               <div key={col.heading}>
                 <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">{col.heading}</p>
@@ -130,20 +136,22 @@ export default function Footer() {
                 </ul>
               </div>
             ))}
+            </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">Contact</p>
+          <div className="relative rounded-2xl border border-white/8 bg-white/[0.02] p-6 shadow-[0_10px_34px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.08)] lg:col-span-2">
+            <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0)_56%)]" />
+            <p className="relative z-10 mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">Contact</p>
             <motion.a
               href="mailto:hello@influicty.in"
               whileHover={{ x: 2 }}
               transition={{ duration: 0.35, ease: PREMIUM_EASE }}
-              className="group inline-flex items-center gap-2.5 text-[14px] text-gray-300 no-underline transition-colors hover:text-white"
+              className="group relative z-10 inline-flex items-center gap-2.5 text-[14px] text-gray-300 no-underline transition-colors hover:text-white"
             >
               <Mail className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-white" />
               <span className="font-medium">hello@influicty.in</span>
             </motion.a>
-            <p className="mt-2 text-[12px] text-gray-500">We reply within 24 hours</p>
+            <p className="relative z-10 mt-2 text-[12px] text-gray-500">We reply within 24 hours</p>
           </div>
         </div>
 

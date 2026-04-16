@@ -3,10 +3,10 @@
 import Image from "next/image";
 import clsx from "clsx";
 
-/** Matches trimmed `public/brand/influcity-logo.png` - layout hugs the graphic. */
-const LOGO_SRC = "/brand/influcity-logo.png";
-const NATURAL_W = 218;
-const NATURAL_H = 64;
+/** Matches original `public/brand/influcity-logo-actual.png`. */
+const LOGO_SRC = "/brand/influcity-logo-actual.png";
+const NATURAL_W = 1024;
+const NATURAL_H = 302;
 
 type BrandLogoProps = {
   variant: "navbar" | "footer";
@@ -27,8 +27,8 @@ export default function BrandLogo({ variant, className }: BrandLogoProps) {
         className={clsx(
           "block w-auto align-top",
           isNav
-            ? "h-11 sm:h-12 md:h-[52px]"
-            : "h-[54px] sm:h-14 md:h-16"
+            ? "h-9 sm:h-10 md:h-11"
+            : "h-[66px] sm:h-[72px] md:h-[82px]"
         )}
       />
     </span>

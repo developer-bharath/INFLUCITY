@@ -54,7 +54,7 @@ export default function Navbar() {
           <Link
             href="/"
             aria-label="INFLUCITY - Home"
-            className="relative z-10 -ml-1 shrink-0 rounded-xl px-1 py-1 outline-offset-4 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
+            className="relative z-10 -ml-1 shrink-0 outline-offset-4 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
           >
             <BrandLogo variant="navbar" />
           </Link>

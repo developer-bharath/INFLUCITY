@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.in";
 const shareImage = "/opengraph-image.png";
 
 const inter = Inter({
@@ -88,6 +88,16 @@ const organizationJsonLd = {
   },
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "INFLUCITY",
+  url: siteUrl,
+  inLanguage: "en-IN",
+  description:
+    "INFLUCITY: influencer marketing platform for local business growth in India.",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -99,6 +109,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Navbar />
         <main className="flex min-h-0 w-full min-w-0 flex-1 flex-col pt-20">{children}</main>

@@ -1,7 +1,7 @@
 ﻿import type { Metadata } from "next";
 import HomeContent from "./home/HomeContent";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.in";
 const shareImage = "/opengraph-image.png";
 
 export const metadata: Metadata = {

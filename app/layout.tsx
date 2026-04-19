@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CONTACT_EMAIL } from "@/lib/contact";
+import { INSTAGRAM_PROFILE_URL } from "@/lib/social";
 import { DEFAULT_OG_IMAGE, getSiteUrl } from "@/lib/seo-config";
 
 const siteUrl = getSiteUrl();
@@ -110,7 +111,7 @@ const organizationJsonLd = {
     "Creator economy",
   ],
   sameAs: [
-    "https://www.instagram.com/influ.city",
+    INSTAGRAM_PROFILE_URL,
     "https://www.youtube.com/@influcity",
     "https://x.com/influcitiy",
     "https://wa.me/918977955534",

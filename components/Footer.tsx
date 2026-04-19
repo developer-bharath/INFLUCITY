@@ -7,6 +7,7 @@ import { FaWhatsapp, FaInstagram, FaLinkedinIn, FaYoutube, FaPinterestP, FaXTwit
 import { ArrowRight, Mail } from "lucide-react";
 import { BUTTON_MOTION, PREMIUM_EASE } from "@/lib/motion";
 import { CONTACT_EMAIL, CONTACT_GMAIL_COMPOSE_URL } from "@/lib/contact";
+import { INSTAGRAM_PROFILE_URL } from "@/lib/social";
 
 const cols = [
   {
@@ -41,7 +42,7 @@ const cols = [
 
 const socialLinks = [
   { href: "https://wa.me/918977955534", label: "WhatsApp", Icon: FaWhatsapp },
-  { href: "https://www.instagram.com/influ.city?igsh=czQ4OGtxbmNnMWFr&utm_source=qr", label: "Instagram", Icon: FaInstagram },
+  { href: INSTAGRAM_PROFILE_URL, label: "Instagram", Icon: FaInstagram },
   { href: "https://pin.it/1Gykgb4fz", label: "Pinterest", Icon: FaPinterestP },
   { href: "https://www.linkedin.com/", label: "LinkedIn", Icon: FaLinkedinIn },
   { href: "https://x.com/influcitiy", label: "X", Icon: FaXTwitter },

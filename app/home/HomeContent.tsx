@@ -33,6 +33,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import clsx from "clsx";
 import HeroAnimation from "@/components/HeroAnimation";
 import LocalTestimonialsCarousel from "@/components/sections/LocalTestimonialsCarousel";
+import HomeInstagramFollow from "@/components/sections/HomeInstagramFollow";
 import { ANDHRA_PRADESH_DISTRICTS_LIST, TELANGANA_DISTRICTS_LIST } from "@/lib/influencerRegions";
 
 /** Static section title stack - avoids scroll-reveal wrappers misaligning headings. */
@@ -642,6 +643,8 @@ export default function HomeContent() {
           </FadeIn>
         </div>
       </section>
+
+      <HomeInstagramFollow />
 
       {/* Final CTA */}
       <section className="relative z-10 w-full min-w-0 border-t border-neutral-800 bg-neutral-950 px-6 py-20 md:py-28">

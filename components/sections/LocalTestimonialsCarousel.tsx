@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useAnimationControls } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { LOCAL_TESTIMONIALS, type LocalTestimonial } from "@/lib/localTestimonials";
 import { PREMIUM_EASE } from "@/lib/motion";
@@ -10,6 +10,28 @@ import clsx from "clsx";
 const AUTO_MS = 5200;
 const soft = { duration: 0.32, ease: PREMIUM_EASE };
 
+/** Softer deceleration so slides feel like a continuous horizontal scroll. */
+const scrollEase = [0.16, 1, 0.28, 1] as const;
+const scrollTransition = { duration: 0.52, ease: scrollEase };
+
+/**
+ * Next (dir=+1): incoming from the right, outgoing to the left — ticker / scroll feel.
+ * Prev: the opposite.
+ */
+const centerSlide = {
+  enter: (dir: number) => ({
+    x: dir > 0 ? "100%" : "-100%",
+    opacity: 0.78,
+    zIndex: 2,
+  }),
+  center: { x: 0, opacity: 1, zIndex: 2 },
+  exit: (dir: number) => ({
+    x: dir > 0 ? "-100%" : "100%",
+    opacity: 0.78,
+    zIndex: 1,
+  }),
+};
+
 function StarRow({ size = 14 }: { size?: number }) {
   return (
     <div className="mb-3 flex gap-0.5">
@@ -17,39 +39,6 @@ function StarRow({ size = 14 }: { size?: number }) {
         <Star key={j} size={size} className="fill-neutral-950 text-neutral-950" aria-hidden />
       ))}
     </div>
-  );
-}
-
-/** Thin border that rotates endlessly — shows “circling” toward the next story. */
-function CirclingRing({
-  index,
-  paused,
-  durationSec,
-}: {
-  index: number;
-  paused: boolean;
-  durationSec: number;
-}) {
-  const ring = useAnimationControls();
-
-  useEffect(() => {
-    ring.stop();
-    if (paused) return;
-    ring.set({ rotate: 0 });
-    void ring.start({
-      rotate: 360,
-      transition: { duration: durationSec, ease: "linear", repeat: Infinity },
-    });
-  }, [index, paused, ring, durationSec]);
-
-  return (
-    <motion.div
-      key={`ring-${index}`}
-      aria-hidden
-      className="pointer-events-none absolute -inset-[3px] rounded-2xl border-2 border-gray-200/80 border-t-neutral-950 border-r-neutral-950/25"
-      initial={{ rotate: 0 }}
-      animate={ring}
-    />
   );
 }
 
@@ -92,14 +81,25 @@ function PreviewCard({
   );
 }
 
-function CenterCard({ item, indexKey }: { item: LocalTestimonial; indexKey: number }) {
+function CenterCard({
+  item,
+  indexKey,
+  direction,
+}: {
+  item: LocalTestimonial;
+  indexKey: number;
+  direction: number;
+}) {
   return (
     <motion.article
-      key={`center-${indexKey}`}
-      initial={{ opacity: 0.5, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={soft}
-      className="relative z-10 mx-auto flex w-full max-w-xl flex-col rounded-2xl border border-gray-200 bg-white p-8 shadow-[0_24px_70px_rgba(0,0,0,0.1)] sm:p-10"
+      key={indexKey}
+      custom={direction}
+      variants={centerSlide}
+      initial="enter"
+      animate="center"
+      exit="exit"
+      transition={scrollTransition}
+      className="absolute left-0 right-0 top-0 mx-auto flex w-full max-w-xl flex-col rounded-2xl border border-gray-200 bg-white p-8 shadow-[0_24px_70px_rgba(0,0,0,0.1)] sm:p-10"
       aria-live="polite"
     >
       <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-neutral-950/[0.04]" aria-hidden />
@@ -122,6 +122,7 @@ function CenterCard({ item, indexKey }: { item: LocalTestimonial; indexKey: numb
 
 export default function LocalTestimonialsCarousel() {
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [paused, setPaused] = useState(false);
   const n = LOCAL_TESTIMONIALS.length;
   const durationSec = AUTO_MS / 1000;
@@ -130,8 +131,15 @@ export default function LocalTestimonialsCarousel() {
   const currentItem = LOCAL_TESTIMONIALS[index];
   const nextItem = LOCAL_TESTIMONIALS[(index + 1) % n];
 
-  const goNext = useCallback(() => setIndex((i) => (i + 1) % n), [n]);
-  const goPrev = useCallback(() => setIndex((i) => (i - 1 + n) % n), [n]);
+  const goNext = useCallback(() => {
+    setDirection(1);
+    setIndex((i) => (i + 1) % n);
+  }, [n]);
+
+  const goPrev = useCallback(() => {
+    setDirection(-1);
+    setIndex((i) => (i - 1 + n) % n);
+  }, [n]);
 
   const goNextRef = useRef(goNext);
   goNextRef.current = goNext;
@@ -142,9 +150,16 @@ export default function LocalTestimonialsCarousel() {
     return () => window.clearInterval(id);
   }, [paused]);
 
-  const goTo = useCallback((i: number) => {
-    if (i !== index) setIndex(i);
-  }, [index]);
+  const goTo = useCallback(
+    (i: number) => {
+      if (i === index) return;
+      const forward = (i - index + n) % n;
+      const backward = (index - i + n) % n;
+      setDirection(forward <= backward ? 1 : -1);
+      setIndex(i);
+    },
+    [index, n]
+  );
 
   return (
     <div
@@ -168,8 +183,11 @@ export default function LocalTestimonialsCarousel() {
           </div>
 
           <div className="relative flex w-full justify-center md:w-[48%] md:min-w-0 md:max-w-[560px]">
-            <CirclingRing index={index} paused={paused} durationSec={durationSec} />
-            <CenterCard item={currentItem} indexKey={index} />
+            <div className="relative mx-auto min-h-[280px] w-full max-w-xl overflow-x-clip py-1 sm:min-h-[300px] md:max-w-none">
+              <AnimatePresence initial={false} custom={direction} mode="sync">
+                <CenterCard item={currentItem} indexKey={index} direction={direction} />
+              </AnimatePresence>
+            </div>
             <p className="sr-only">Stories cycle automatically about every {Math.round(durationSec)} seconds.</p>
           </div>
 

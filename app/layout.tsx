@@ -4,9 +4,10 @@ import "./globals.css";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { CONTACT_EMAIL } from "@/lib/contact";
+import { DEFAULT_OG_IMAGE, getSiteUrl } from "@/lib/seo-config";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.in";
-const shareImage = "/brand/influcity-share-og.jpg";
+const siteUrl = getSiteUrl();
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,22 +30,30 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: "INFLUCITY",
   title: {
-    default: "INFLUCITY - Built for business growth",
+    default: "INFLUCITY — Local influencer marketing for businesses in India",
     template: "%s | INFLUCITY",
   },
   description:
-    "INFLUCITY: influencer marketing for local business in India. Local business promotion, lead tracking, and campaigns to get more customers for your shop - without agency guesswork.",
+    "INFLUCITY connects local businesses with vetted influencers for paid campaigns across India — with strong focus on Telangana, Andhra Pradesh, and Hyderabad. Launch in 48 hours, track outcomes, and grow footfall without agency guesswork.",
   keywords: [
     "influencer marketing for local business",
     "local business promotion India",
+    "Hyderabad influencer marketing",
+    "Telangana influencer campaigns",
+    "Andhra Pradesh brand collaborations",
+    "Karimnagar local marketing",
     "get more customers for my shop",
     "small business marketing India",
     "INFLUCITY",
     "local influencer campaigns",
+    "paid creator collaborations",
+    "micro influencer marketing India",
   ],
-  authors: [{ name: "INFLUCITY" }],
+  authors: [{ name: "INFLUCITY", url: siteUrl }],
   creator: "INFLUCITY",
+  publisher: "INFLUCITY",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
@@ -55,25 +64,30 @@ export const metadata: Metadata = {
     locale: "en_IN",
     siteName: "INFLUCITY",
     url: siteUrl,
-    images: [
-      {
-        url: shareImage,
-        width: 1200,
-        height: 630,
-        type: "image/jpeg",
-        alt: "INFLUCITY",
-      },
-    ],
+    title: "INFLUCITY — Local influencer marketing for businesses in India",
+    description:
+      "Structured influencer campaigns for shops, salons, gyms, and retail — with creator coverage across Telangana, Andhra Pradesh, and beyond.",
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    images: [shareImage],
+    title: "INFLUCITY — Local influencer marketing",
+    description:
+      "Paid local campaigns, vetted creators, and clear reporting for businesses in India — Telangana & Andhra Pradesh focus.",
+    images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
-  category: "technology",
+  category: "business",
 };
 
 const organizationJsonLd = {
@@ -81,12 +95,26 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "INFLUCITY",
   url: siteUrl,
+  email: CONTACT_EMAIL,
   description:
-    "Platform for influencer marketing for local business in India - local business promotion, campaign management, and measurable customer growth.",
-  areaServed: {
-    "@type": "Country",
-    name: "India",
-  },
+    "Influencer marketing platform for local businesses in India — campaign matching, briefs, and attribution. Active creator onboarding across Telangana and Andhra Pradesh.",
+  areaServed: [
+    { "@type": "Country", name: "India" },
+    { "@type": "State", name: "Telangana" },
+    { "@type": "State", name: "Andhra Pradesh" },
+  ],
+  knowsAbout: [
+    "Influencer marketing",
+    "Local business promotion",
+    "Hyper-local advertising",
+    "Creator economy",
+  ],
+  sameAs: [
+    "https://www.instagram.com/influ.city",
+    "https://www.youtube.com/@influcity",
+    "https://x.com/influcitiy",
+    "https://wa.me/918977955534",
+  ],
 };
 
 const websiteJsonLd = {
@@ -96,7 +124,7 @@ const websiteJsonLd = {
   url: siteUrl,
   inLanguage: "en-IN",
   description:
-    "INFLUCITY: influencer marketing platform for local business growth in India.",
+    "INFLUCITY helps local businesses run paid influencer campaigns and onboard creators across Telangana, Andhra Pradesh, and India.",
 };
 
 export default function RootLayout({

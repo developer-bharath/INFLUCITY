@@ -1,6 +1,7 @@
 ﻿import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/seo-config";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.in";
+const base = getSiteUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
@@ -18,6 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog/influencer-marketing-roi",
     "/blog/local-influencers-drive-real-customers",
     "/blog/influencer-marketing-mistakes-to-avoid",
+    "/blog/how-to-choose-the-right-influencer-for-your-business",
+    "/blog/why-traditional-advertising-is-failing-local-businesses",
     "/blog/best-marketing-strategy-karimnagar-2026",
     "/blog/karimnagar-restaurants-influencer-marketing",
     "/blog/promote-salon-gym-karimnagar",
@@ -32,10 +35,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const lastModified = new Date();
   return paths.map((path) => ({
-    url: `${base.replace(/\/$/, "")}${path || "/"}`,
+    url: `${base}${path || "/"}`,
     lastModified,
     changeFrequency: path === "" || path.startsWith("/blog") ? "weekly" : "monthly",
-    priority: path === "" ? 1 : path.startsWith("/blog") ? 0.85 : 0.8,
+    priority:
+      path === "" ? 1 : path === "/influencers" || path === "/get-started" ? 0.9 : path.startsWith("/blog") ? 0.85 : 0.8,
   }));
 }
 

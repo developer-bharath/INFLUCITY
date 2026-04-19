@@ -137,7 +137,7 @@ export async function POST(request: Request) {
           records?: Array<{ id: string }>;
         };
 
-        const notifyEmailTo = process.env.LEAD_EMAIL_TO ?? "influcity.karimnagar@gmail.com";
+        const notifyEmailTo = process.env.LEAD_EMAIL_TO ?? "hello@influcity.in";
         const subject = `New ${fields.Type || "Website"} lead - ${fields.Name || "Unknown"}`;
         const text = backupLines.join("\n");
 

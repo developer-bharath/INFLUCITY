@@ -3,8 +3,24 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Read the latest INFLUCITY insights on influencer marketing for local business growth.",
+  title: "Blog — Local influencer marketing insights",
+  description:
+    "Guides and ideas on influencer marketing for local businesses in India — including Hyderabad, Telangana, Karimnagar, and Andhra Pradesh — ROI, creator selection, and what actually drives footfall.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "INFLUCITY Blog — Local business & influencer marketing",
+    description:
+      "Practical articles on local influencer campaigns, traditional vs creator-led growth, and regional marketing strategy.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "INFLUCITY Blog",
+    description: "Influencer marketing insights for local businesses and creators in India.",
+  },
 };
 
 const posts = [

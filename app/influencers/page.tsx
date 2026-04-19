@@ -16,7 +16,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
-import { HeroReveal, HeroRevealStack } from "@/components/ui/HeroReveal";
+import HeroInfluencers from "@/components/sections/HeroInfluencers";
 import { BUTTON_MOTION, PREMIUM_EASE } from "@/lib/motion";
 import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
 
@@ -146,76 +146,7 @@ export default function InfluencersPage() {
 
   return (
     <div className="bg-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-neutral-900 bg-neutral-950 px-6 pt-32 pb-24 md:pt-40 md:pb-32">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)",
-            backgroundSize: "56px 56px",
-          }}
-        />
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <HeroRevealStack
-            eyebrow={<p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-gray-500">Influencers</p>}
-            title={
-              <h1
-                className="mb-6 text-[clamp(38px,7vw,72px)] font-black leading-[1.02] tracking-[-2px] text-white"
-                style={{ fontFamily: "var(--font-poppins), system-ui, sans-serif" }}
-              >
-                Join the INFLUCITY Creator Network
-              </h1>
-            }
-            subtitle={
-              <p className="mx-auto mb-10 max-w-lg text-[17px] leading-relaxed text-gray-500">
-                Build reliable creator income through paid local partnerships, premium campaign briefs, and outcome-driven brand collaborations.
-              </p>
-            }
-          />
-          <HeroReveal delay={0.26} className="flex flex-wrap justify-center gap-3">
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="#apply-form"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-[15px] font-semibold text-neutral-950 no-underline transition-colors hover:bg-gray-100"
-              >
-                Apply now
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <a
-                href="https://wa.me/918977955534"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-xl border border-neutral-700 px-7 py-3.5 text-[15px] font-semibold text-white no-underline transition-colors hover:border-gray-500"
-              >
-                WhatsApp
-              </a>
-            </motion.div>
-          </HeroReveal>
-
-          <div className="mx-auto mt-16 flex max-w-lg flex-wrap justify-center gap-10 md:gap-14">
-            {[
-              { v: "2,000+", l: "Active creators" },
-              { v: "60K+", l: "Avg. monthly payout" },
-              { v: "15+", l: "Cities" },
-            ].map((s) => (
-              <FadeIn key={s.l} delay={0.15}>
-                <div className="text-center">
-                  <div
-                    className="text-[26px] font-black text-white md:text-[28px]"
-                    style={{ fontFamily: "var(--font-poppins), system-ui, sans-serif" }}
-                  >
-                    {s.v}
-                  </div>
-                  <div className="mt-1 text-[12px] text-gray-600">{s.l}</div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HeroInfluencers />
 
       {/* Benefits */}
       <section id="benefits" className="px-6 py-20 md:py-28">

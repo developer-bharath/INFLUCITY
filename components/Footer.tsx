@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { FaWhatsapp, FaInstagram, FaLinkedinIn, FaYoutube, FaPinterestP, FaXTwitter } from "react-icons/fa6";
 import { ArrowRight, Mail } from "lucide-react";
 import { BUTTON_MOTION, PREMIUM_EASE } from "@/lib/motion";
+import { CONTACT_EMAIL, CONTACT_GMAIL_COMPOSE_URL } from "@/lib/contact";
 
 const cols = [
   {
@@ -150,15 +151,18 @@ export default function Footer() {
             <div className="lg:col-span-2">
               <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-gray-500">Contact</p>
               <motion.a
-                href="mailto:hello@influicty.in"
+                href={CONTACT_GMAIL_COMPOSE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Compose a message in Gmail"
                 whileHover={{ x: 2 }}
                 transition={{ duration: 0.35, ease: PREMIUM_EASE }}
                 className="group inline-flex items-center gap-2.5 text-[14px] text-gray-300 no-underline transition-colors hover:text-white"
               >
                 <Mail className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-white" />
-                <span className="font-medium">hello@influicty.in</span>
+                <span className="font-medium">{CONTACT_EMAIL}</span>
               </motion.a>
-              <p className="mt-2 text-[12px] text-gray-500">We reply within 24 hours</p>
+              <p className="mt-2 text-[12px] text-gray-500">Opens Gmail compose — we reply within 24 hours</p>
             </div>
         </div>
 

@@ -1,51 +1,48 @@
 ﻿import type { Metadata } from "next";
 import HomeContent from "./home/HomeContent";
+import { DEFAULT_OG_IMAGE, getSiteUrl } from "@/lib/seo-config";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.in";
-const shareImage = "/brand/influcity-share-og.jpg";
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Influencer marketing for local business in India | INFLUCITY - Built for business growth",
+      "INFLUCITY — Influencer marketing for local business in Telangana, Andhra Pradesh & India",
   },
   description:
-    "INFLUCITY is influencer marketing for local business in India - local business promotion with real customers, not just views. Get more customers for your shop, salon, gym, or retail store with transparent tracking.",
+    "Grow your shop, salon, gym, or retail store with paid local influencer campaigns. INFLUCITY matches businesses with vetted creators — strong coverage in Hyderabad, Telangana, and Andhra Pradesh — with 48-hour launch and transparent tracking.",
   keywords: [
     "influencer marketing for local business",
+    "Hyderabad influencer marketing",
+    "Telangana business promotion",
+    "Andhra Pradesh influencer campaigns",
     "local business promotion India",
     "get more customers for my shop",
     "small business marketing India",
     "INFLUCITY",
     "local influencer marketing",
+    "Karimnagar marketing",
+    "Vijayawada influencer",
   ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "INFLUCITY - Influencer marketing for local business in India",
+    title: "INFLUCITY — Local influencer marketing for businesses in India",
     description:
-      "Local business promotion India teams trust: structured influencer campaigns, 48-hour launch, and measurable ROI.",
+      "Structured campaigns, vetted creators, and measurable outcomes. Serving businesses across India with deep reach in Telangana and Andhra Pradesh.",
     url: siteUrl,
     siteName: "INFLUCITY",
     locale: "en_IN",
     type: "website",
-    images: [
-      {
-        url: shareImage,
-        width: 1200,
-        height: 630,
-        type: "image/jpeg",
-        alt: "INFLUCITY",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "INFLUCITY - Built for business growth",
+    title: "INFLUCITY — Local influencer marketing",
     description:
-      "Small business marketing India: connect with vetted influencers and track every customer touchpoint.",
-    images: [shareImage],
+      "Paid local campaigns for businesses; creator network across Telangana & Andhra Pradesh. Launch fast. Track results.",
+    images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
     index: true,

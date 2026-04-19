@@ -12,18 +12,28 @@ import {
   XCircle,
   Zap,
   MapPin,
+  MapPinned,
   BarChart3,
   DollarSign,
-  Star,
   ChevronRight,
   UtensilsCrossed,
   Scissors,
   Dumbbell,
   Store,
+  Hotel,
+  Stethoscope,
+  Pill,
+  GraduationCap,
+  Car,
+  Coffee,
+  Sparkles,
+  Home,
 } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import clsx from "clsx";
 import HeroAnimation from "@/components/HeroAnimation";
+import LocalTestimonialsCarousel from "@/components/sections/LocalTestimonialsCarousel";
+import { ANDHRA_PRADESH_DISTRICTS_LIST, TELANGANA_DISTRICTS_LIST } from "@/lib/influencerRegions";
 
 /** Static section title stack - avoids scroll-reveal wrappers misaligning headings. */
 function SectionIntro({
@@ -159,6 +169,46 @@ const whoItsFor = [
     title: "Retail shops",
     desc: "Turn foot traffic into repeat buyers with hyper-local storytelling and clear offers.",
   },
+  {
+    icon: Hotel,
+    title: "Hotels & stays",
+    desc: "Lift weekday occupancy and weekend getaways with creators whose audiences travel and book locally.",
+  },
+  {
+    icon: Stethoscope,
+    title: "Clinics & dental",
+    desc: "Build trust for consultations and follow-ups — especially for families comparing options online first.",
+  },
+  {
+    icon: Pill,
+    title: "Pharmacies",
+    desc: "Promote health camps, OTC bundles, and home delivery with compliant, neighbourhood-focused storytelling.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Coaching & tuition",
+    desc: "Fill batches and demo sessions when parents and students discover you through credible local educators.",
+  },
+  {
+    icon: Car,
+    title: "Garages & auto care",
+    desc: "Bring in servicing, detailing, and accessory sales from drivers who trust peer recommendations over hoardings.",
+  },
+  {
+    icon: Coffee,
+    title: "Cafés & bakeries",
+    desc: "Highlight new menus, combos, and seating — ideal for short-form reels that pull in nearby office and college crowds.",
+  },
+  {
+    icon: Sparkles,
+    title: "Spas & wellness",
+    desc: "Package therapies and memberships with calm, premium positioning that matches how clients choose self-care.",
+  },
+  {
+    icon: Home,
+    title: "Real estate & interiors",
+    desc: "Showcase listings, site visits, and fit-out work to serious buyers and renters browsing hyper-local content.",
+  },
 ];
 
 const steps = [
@@ -189,30 +239,6 @@ const comparisons = [
   { label: "Performance-based model", us: true, them: false },
   { label: "Campaign live in 48 hours", us: true, them: false },
   { label: "Dedicated account manager", us: true, them: true },
-];
-
-const testimonials = [
-  {
-    quote:
-      "Within three weeks our footfall jumped 40%. The local influencers INFLUCITY matched us with felt like regulars recommending our cafe.",
-    name: "Priya Sharma",
-    role: "Owner, Cafe Aroma",
-    initials: "PS",
-  },
-  {
-    quote:
-      "Traditional digital ads gave us noise. INFLUCITY gave us over 200 new memberships in the first month with clear ROI.",
-    name: "Rahul Mehta",
-    role: "Founder, FitZone Gym",
-    initials: "RM",
-  },
-  {
-    quote:
-      "We finally see which influencer drove which sale. No more guessing - just decisions based on real numbers.",
-    name: "Ananya Singh",
-    role: "Manager, Urban Threads",
-    initials: "AS",
-  },
 ];
 
 const proofStats = [
@@ -330,7 +356,7 @@ export default function HomeContent() {
             description="This platform is built for local businesses who want real customers, not just online views."
           />
 
-          <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 xl:grid-cols-4">
             {whoItsFor.map((item, i) => {
               const Icon = item.icon;
               return (
@@ -352,6 +378,79 @@ export default function HomeContent() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Influencer regions */}
+      <section
+        id="influencer-regions"
+        className="w-full min-w-0 scroll-mt-24 border-t border-neutral-800 bg-neutral-950 px-6 py-20 md:py-28"
+        aria-labelledby="influencer-regions-heading"
+      >
+        <div className="mx-auto max-w-6xl">
+          <SectionIntro
+            theme="dark"
+            titleId="influencer-regions-heading"
+            eyebrow="For creators"
+            title="We are looking for influencers from these districts"
+            titleClassName="text-[clamp(26px,4.2vw,44px)]"
+            description="If you create in Telangana or Andhra Pradesh and want paid local brand work, we are actively onboarding creators across the districts below."
+          />
+
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+            <FadeIn direction="up">
+              <div className="h-full rounded-2xl border border-neutral-700/80 bg-white/[0.03] p-7 shadow-[0_12px_40px_rgba(0,0,0,0.25)] md:p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+                    <MapPin className="h-[18px] w-[18px]" strokeWidth={1.5} aria-hidden />
+                  </span>
+                  <h3
+                    className="text-[15px] font-bold tracking-tight text-white"
+                    style={{ fontFamily: "var(--font-poppins), system-ui, sans-serif" }}
+                  >
+                    Telangana
+                  </h3>
+                </div>
+                <p className="text-[14px] leading-relaxed text-neutral-400 md:text-[15px]">{TELANGANA_DISTRICTS_LIST}</p>
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.08} direction="up">
+              <div className="h-full rounded-2xl border border-neutral-700/80 bg-white/[0.03] p-7 shadow-[0_12px_40px_rgba(0,0,0,0.25)] md:p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-white">
+                    <MapPinned className="h-[18px] w-[18px]" strokeWidth={1.5} aria-hidden />
+                  </span>
+                  <h3
+                    className="text-[15px] font-bold tracking-tight text-white"
+                    style={{ fontFamily: "var(--font-poppins), system-ui, sans-serif" }}
+                  >
+                    Andhra Pradesh
+                  </h3>
+                </div>
+                <p className="text-[14px] leading-relaxed text-neutral-400 md:text-[15px]">{ANDHRA_PRADESH_DISTRICTS_LIST}</p>
+              </div>
+            </FadeIn>
+          </div>
+
+          <FadeIn delay={0.12} className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/influencers"
+                className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-white px-8 py-3 text-[15px] font-semibold text-neutral-950 no-underline shadow-sm transition-colors hover:bg-gray-100 sm:w-auto"
+              >
+                Join as influencer
+                <ArrowRight size={16} aria-hidden />
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/influencers#apply-form"
+                className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-neutral-600 px-8 py-3 text-[15px] font-semibold text-white no-underline transition-colors hover:border-neutral-400 hover:bg-white/5 sm:w-auto"
+              >
+                Apply now
+              </Link>
+            </motion.div>
+          </FadeIn>
         </div>
       </section>
 
@@ -525,41 +624,22 @@ export default function HomeContent() {
       </section>
 
       {/* Testimonials */}
-      <section className="relative z-0 w-full min-w-0 border-t border-gray-200 bg-gray-50 px-6 py-20 md:py-28">
+      <section
+        className="relative z-0 w-full min-w-0 border-t border-gray-200 bg-gray-50 px-6 py-20 md:py-28"
+        aria-labelledby="testimonials-heading"
+      >
         <div className="mx-auto max-w-6xl">
           <SectionIntro
             eyebrow="Testimonials"
-            title="Loved by operators"
+            titleId="testimonials-heading"
+            title="Loved by local businesses"
             titleClassName="text-[clamp(30px,4.8vw,52px)]"
+            description="Stories from shops, salons, gyms, and owners across Telangana, Andhra Pradesh, and Hyderabad — in their words."
           />
 
-          <div className="grid gap-8 md:grid-cols-3 md:gap-10">
-            {testimonials.map((t, i) => (
-              <FadeIn key={t.name} delay={i * 0.08} direction="up">
-                <motion.article
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-9 shadow-sm md:p-10"
-                >
-                  <div className="mb-4 flex gap-0.5">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} size={15} className="fill-neutral-950 text-neutral-950" aria-hidden />
-                    ))}
-                  </div>
-                  <p className="mb-10 flex-1 text-[15px] leading-relaxed text-gray-600">{`"${t.quote}"`}</p>
-                  <div className="mt-auto flex items-center gap-3 border-t border-gray-100 pt-6">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-950">
-                      <span className="text-[11px] font-bold text-white">{t.initials}</span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-[14px] font-semibold text-neutral-950">{t.name}</p>
-                      <p className="text-[13px] text-gray-500">{t.role}</p>
-                    </div>
-                  </div>
-                </motion.article>
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn delay={0.06}>
+            <LocalTestimonialsCarousel />
+          </FadeIn>
         </div>
       </section>
 

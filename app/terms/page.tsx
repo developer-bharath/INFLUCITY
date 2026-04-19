@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CONTACT_EMAIL, CONTACT_GMAIL_COMPOSE_URL } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
@@ -138,10 +139,12 @@ export default function TermsPage() {
             <section>
               <h2 className="mb-2 text-[16px] font-bold text-neutral-950">14. CONTACT</h2>
               <Link
-                href="mailto:hello@influicty.in"
+                href={CONTACT_GMAIL_COMPOSE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-semibold text-neutral-900 underline underline-offset-2"
               >
-                hello@influicty.in
+                {CONTACT_EMAIL}
               </Link>
             </section>
           </div>

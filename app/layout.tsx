@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://influcity.in";
-const shareImage = "/opengraph-image.png";
+const shareImage = "/brand/influcity-share-og.jpg";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,6 +60,7 @@ export const metadata: Metadata = {
         url: shareImage,
         width: 1200,
         height: 630,
+        type: "image/jpeg",
         alt: "INFLUCITY",
       },
     ],

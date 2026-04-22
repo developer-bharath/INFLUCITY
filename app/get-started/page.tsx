@@ -6,9 +6,12 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { HeroRevealStack } from "@/components/ui/HeroReveal";
 import { BUTTON_MOTION } from "@/lib/motion";
 import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 const fieldClass =
   "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-[14px] text-white outline-none transition-all placeholder:text-gray-500 focus:border-white/35 focus:bg-white/10 focus:ring-2 focus:ring-white/10";
+const SUBMISSION_FALLBACK_ERROR =
+  `If your submission was not successful, it is from our side. Don't worry - please email us at ${CONTACT_EMAIL}.`;
 
 export default function GetStartedPage() {
   const [form, setForm] = useState({
@@ -49,8 +52,8 @@ export default function GetStartedPage() {
       }
 
       setDone(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } catch {
+      setError(SUBMISSION_FALLBACK_ERROR);
     } finally {
       setLoading(false);
     }

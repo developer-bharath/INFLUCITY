@@ -10,6 +10,8 @@ import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
 
 const fieldClass =
   "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-[14px] text-neutral-900 outline-none transition-all placeholder:text-gray-400 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-200";
+const SUBMISSION_FALLBACK_ERROR =
+  `If your submission was not successful, it is from our side. Don't worry - please email us at ${CONTACT_EMAIL}.`;
 
 function AnimatedSupportLady() {
   return (
@@ -105,8 +107,8 @@ export default function ContactPage() {
       }
 
       setDone(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } catch {
+      setError(SUBMISSION_FALLBACK_ERROR);
     } finally {
       setLoading(false);
     }

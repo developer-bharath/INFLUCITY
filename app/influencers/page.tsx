@@ -19,6 +19,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import HeroInfluencers from "@/components/sections/HeroInfluencers";
 import { BUTTON_MOTION, PREMIUM_EASE } from "@/lib/motion";
 import { COUNTRY_CODE_SUGGESTIONS } from "@/lib/countryCodes";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 const benefits = [
   {
@@ -82,6 +83,8 @@ const onboardingBenefits = [
 
 const fieldClass =
   "w-full rounded-xl border border-white/20 bg-black px-4 py-3 text-[14px] text-white outline-none transition-all placeholder:text-white/45 focus:border-white/40 focus:ring-2 focus:ring-white/20";
+const SUBMISSION_FALLBACK_ERROR =
+  `If your submission was not successful, it is from our side. Don't worry - please email us at ${CONTACT_EMAIL}.`;
 
 export default function InfluencersPage() {
   const [form, setForm] = useState({
@@ -137,8 +140,8 @@ export default function InfluencersPage() {
       }
 
       setDone(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } catch {
+      setError(SUBMISSION_FALLBACK_ERROR);
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 type LeadPayload = {
   name?: string;
@@ -61,6 +62,7 @@ export async function POST(request: Request) {
     const apiKey = process.env.AIRTABLE_API_KEY;
     const baseId = process.env.AIRTABLE_BASE_ID;
     const tableName = process.env.AIRTABLE_TABLE_NAME ?? "Leads";
+    const notifyEmailTo = CONTACT_EMAIL;
 
     if (!apiKey || !baseId) {
       return NextResponse.json(
@@ -137,7 +139,6 @@ export async function POST(request: Request) {
           records?: Array<{ id: string }>;
         };
 
-        const notifyEmailTo = process.env.LEAD_EMAIL_TO ?? "hello@influcity.in";
         const subject = `New ${fields.Type || "Website"} lead - ${fields.Name || "Unknown"}`;
         const text = backupLines.join("\n");
 
@@ -187,6 +188,22 @@ export async function POST(request: Request) {
           : errMessage;
 
       console.error("Airtable lead insert failed:", { errType, errMessage, status: airtableRes.status });
+      try {
+        await sendLeadNotificationEmail({
+          to: notifyEmailTo,
+          subject: `ALERT: Airtable lead save failed - ${fields.Type || "Website"} - ${fields.Name || "Unknown"}`,
+          text: [
+            "Airtable Save Status: FAILED",
+            `Failure Reason: ${readable}`,
+            `Airtable HTTP Status: ${airtableRes.status}`,
+            "",
+            ...backupLines,
+          ].join("\n"),
+        });
+      } catch (emailError) {
+        console.error("Airtable failure alert email failed:", emailError);
+      }
+
       return NextResponse.json(
         {
           ok: false,
@@ -194,6 +211,21 @@ export async function POST(request: Request) {
         },
         { status: 502 }
       );
+    }
+
+    try {
+      await sendLeadNotificationEmail({
+        to: notifyEmailTo,
+        subject: `ALERT: Airtable lead save failed after retries - ${fields.Type || "Website"} - ${fields.Name || "Unknown"}`,
+        text: [
+          "Airtable Save Status: FAILED",
+          "Failure Reason: Failed to create Airtable lead record after schema retries.",
+          "",
+          ...backupLines,
+        ].join("\n"),
+      });
+    } catch (emailError) {
+      console.error("Airtable retry failure alert email failed:", emailError);
     }
 
     return NextResponse.json(

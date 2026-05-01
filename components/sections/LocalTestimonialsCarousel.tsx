@@ -7,12 +7,12 @@ import { LOCAL_TESTIMONIALS, type LocalTestimonial } from "@/lib/localTestimonia
 import { PREMIUM_EASE } from "@/lib/motion";
 import clsx from "clsx";
 
-const AUTO_MS = 5200;
+const AUTO_MS = 4800;
 const soft = { duration: 0.32, ease: PREMIUM_EASE };
 
-/** Softer deceleration so slides feel like a continuous horizontal scroll. */
-const scrollEase = [0.16, 1, 0.28, 1] as const;
-const scrollTransition = { duration: 0.52, ease: scrollEase };
+/** Smooth ease for a premium right-to-left glide. */
+const scrollEase = [0.22, 1, 0.36, 1] as const;
+const scrollTransition = { duration: 0.78, ease: scrollEase };
 
 /**
  * Next (dir=+1): incoming from the right, outgoing to the left — ticker / scroll feel.
@@ -20,14 +20,16 @@ const scrollTransition = { duration: 0.52, ease: scrollEase };
  */
 const centerSlide = {
   enter: (dir: number) => ({
-    x: dir > 0 ? "100%" : "-100%",
-    opacity: 0.78,
+    x: dir > 0 ? "72%" : "-72%",
+    opacity: 0.68,
+    scale: 0.985,
     zIndex: 2,
   }),
-  center: { x: 0, opacity: 1, zIndex: 2 },
+  center: { x: 0, opacity: 1, scale: 1, zIndex: 2 },
   exit: (dir: number) => ({
-    x: dir > 0 ? "-100%" : "100%",
-    opacity: 0.78,
+    x: dir > 0 ? "-72%" : "72%",
+    opacity: 0.68,
+    scale: 0.985,
     zIndex: 1,
   }),
 };

@@ -4,8 +4,10 @@ import BlogPostPager from "@/components/blog/BlogPostPager";
 export default function BlogLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <BlogPostPager compact />
-      {children}
+      <div className="relative">
+        <BlogPostPager compact />
+        {children}
+      </div>
       <BlogPostPager />
     </>
   );

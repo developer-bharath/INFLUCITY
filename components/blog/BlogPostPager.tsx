@@ -18,8 +18,8 @@ export default function BlogPostPager({ compact = false }: { compact?: boolean }
 
   if (compact) {
     return (
-      <div className="bg-white px-6 pt-28 md:pt-36">
-        <nav className="mx-auto flex max-w-4xl items-center justify-end gap-2" aria-label="Blog top arrows">
+      <div className="pointer-events-none absolute inset-x-0 top-32 z-20 px-6 md:top-40">
+        <nav className="pointer-events-auto mx-auto flex max-w-4xl items-center justify-end gap-2" aria-label="Blog top arrows">
           <ArrowButton href={prev?.href} label="Previous blog" icon={<ArrowLeft className="h-3.5 w-3.5" aria-hidden />} />
           <ArrowButton
             href={next?.href}

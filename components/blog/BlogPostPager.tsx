@@ -16,19 +16,24 @@ export default function BlogPostPager({ compact = false }: { compact?: boolean }
   const prev = index > 0 ? BLOG_POSTS[index - 1] : null;
   const next = index < BLOG_POSTS.length - 1 ? BLOG_POSTS[index + 1] : null;
 
+  if (compact) {
+    return (
+      <div className="bg-white px-6 pt-28 md:pt-36">
+        <nav className="mx-auto flex max-w-4xl items-center justify-end gap-2" aria-label="Blog top arrows">
+          <ArrowButton href={prev?.href} label="Previous blog" icon={<ArrowLeft className="h-3.5 w-3.5" aria-hidden />} />
+          <ArrowButton
+            href={next?.href}
+            label="Next blog"
+            icon={<ArrowRight className="h-3.5 w-3.5" aria-hidden />}
+            align="right"
+          />
+        </nav>
+      </div>
+    );
+  }
+
   return (
     <section className="bg-white px-6 pb-14 md:pb-16">
-      <nav className="mx-auto mt-4 flex max-w-4xl items-center justify-between gap-3" aria-label="Blog top arrows">
-        <ArrowButton href={prev?.href} label="Previous blog" icon={<ArrowLeft className="h-4 w-4" aria-hidden />} />
-        <ArrowButton
-          href={next?.href}
-          label="Next blog"
-          icon={<ArrowRight className="h-4 w-4" aria-hidden />}
-          align="right"
-        />
-      </nav>
-
-      {compact ? null : (
       <nav className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2" aria-label="Blog post navigation">
         <NavCard
           href={prev?.href}
@@ -45,7 +50,6 @@ export default function BlogPostPager({ compact = false }: { compact?: boolean }
           align="right"
         />
       </nav>
-      )}
     </section>
   );
 }
@@ -62,7 +66,7 @@ function ArrowButton({
   align?: "left" | "right";
 }) {
   const cls =
-    "inline-flex min-h-[38px] min-w-[38px] items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-colors hover:border-gray-300 hover:text-neutral-900";
+    "inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition-colors hover:border-gray-300 hover:text-neutral-900";
 
   if (!href) {
     return (
